@@ -8,6 +8,7 @@ import UploadSection from "../upload/upload";
 import StatsSection from "../stats/stat";
 import HistorySection from "../history/history";
 
+
 export default function DashboardPage() {
   // Toggle this to test both states
   const [isGuest, setIsGuest] = useState(true);
@@ -26,7 +27,7 @@ export default function DashboardPage() {
           {/* Top Row: Upload & Stats */}
           <div className="grid lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2">
-              <UploadSection onGenerate={() => setHasGeneratedQuiz(true)} />
+              <UploadSection  />
             </div>
             <div className="lg:col-span-1">
               <StatsSection isGuest={isGuest} />
