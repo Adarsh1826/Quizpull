@@ -61,7 +61,7 @@ export default function UploadSection(
 
         {/* Button */}
         <button
-          onClick={()=>uplaodFileToBucket(file)}
+          onClick={ ()=>  uplaodFileToBucket(file)}
           className="px-6 py-2 bg-white text-black font-semibold rounded-full text-sm mt-4 active:scale-95 transition-transform hover:bg-gray-200"
         >
           Upload

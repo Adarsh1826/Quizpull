@@ -7,7 +7,7 @@ import UploadSection from "../upload/upload";
 
 import StatsSection from "../stats/stat";
 import HistorySection from "../history/history";
-
+import AllFilePage from "../allfiles/allfiles";
 
 export default function DashboardPage() {
   // Toggle this to test both states
@@ -41,6 +41,7 @@ export default function DashboardPage() {
             <HistorySection isGuest={isGuest} />
           </section>
         </div>
+        <AllFilePage/>
       </main>
     </div>
   );
