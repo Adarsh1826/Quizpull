@@ -2,12 +2,40 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-
+import { useState } from "react";
+import { supabase } from "@/utils/client";
 export default function AuthPage() {
     const url = usePathname();
     const page = url.split("/").pop();
 
     const isLogin = page === "login";
+
+    const [email,setEmail] = useState("")
+    const [password,setPassword] = useState("")
+
+    const handleLogin  = async()=>{
+        try {
+           const {data,error} =  await supabase.auth.signInWithPassword({
+            email:email,
+             password:password
+            })
+        } catch (error) {
+            console.log("Error");
+            
+        }
+    }
+
+    const handleSignup = async()=>{
+        try {
+            const {data,error} = await supabase.auth.signUp({
+                email:email,
+                password:password
+            }) 
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
 
     return (
         <div className="flex items-center justify-center min-h-screen max-w-full bg-black">
@@ -54,6 +82,9 @@ export default function AuthPage() {
                         <input
                             type="email"
                             placeholder="Email"
+                            onChange={(e)=>{
+                                setEmail(e.target.value)
+                            }}
                             className="w-full px-4 py-2 rounded-lg 
                          bg-white/5 text-white placeholder-gray-400
                          border border-white/10
@@ -63,16 +94,26 @@ export default function AuthPage() {
                         <input
                             type="password"
                             placeholder="Password"
+                            onChange={(e)=>{
+                                setPassword(e.target.value)
+                            }}
                             className="w-full px-4 py-2 rounded-lg 
                          bg-white/5 text-white placeholder-gray-400
                          border border-white/10
                          focus:outline-none focus:ring-2 focus:ring-gray-500"
                         />
 
+                        {isLogin ? (<>
                         <button className="w-full py-2 bg-white text-black rounded-lg 
-                               hover:opacity-90 transition font-medium">
-                            {isLogin ? "Sign In" : "Sign Up"}
+                               hover:opacity-90 transition font-medium" onClick={handleLogin}>
+                            Sign In
                         </button>
+                        </>):(<>
+                        <button className="w-full py-2 bg-white text-black rounded-lg 
+                               hover:opacity-90 transition font-medium" onClick={handleSignup}>
+                           Sign Up
+                        </button>
+                        </>)}
 
                         {/* Divider */}
                         <div className="flex items-center w-full">

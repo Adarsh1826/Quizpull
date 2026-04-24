@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { Lock, Clock, ChevronRight, FileText } from "lucide-react";
 
 interface HistorySectionProps {
@@ -8,6 +7,7 @@ interface HistorySectionProps {
 }
 
 export default function HistorySection({ isGuest }: HistorySectionProps) {
+
   // Mock data for display
   const historyData = [
     {
@@ -32,6 +32,8 @@ export default function HistorySection({ isGuest }: HistorySectionProps) {
       questions: 10,
     },
   ];
+
+ 
 
   return (
     <div className="relative w-full">
@@ -109,7 +111,8 @@ export default function HistorySection({ isGuest }: HistorySectionProps) {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 mt-2 max-w-[300px]">
-              <button className="flex-1 py-1 px-4 bg-white text-black text-xs font-bold rounded-xl hover:bg-neutral-200 transition-all">
+              <button className="flex-1 py-1 px-4 bg-white text-black text-xs font-bold rounded-xl hover:bg-neutral-200 transition-all"
+              >
                 Create Free Account
               </button>
               <button className="flex-1 py-1 px-4 bg-white/5 border border-white/10 text-white text-xs font-bold rounded-xl hover:bg-white/10 transition-all">
