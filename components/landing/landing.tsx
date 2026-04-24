@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRouter } from "next/navigation";
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
@@ -26,6 +27,8 @@ export default function LandingPage() {
     const previewRef = useRef(null);
     const featuresRef = useRef(null);
     const statsRef = useRef(null);
+
+    const router = useRouter()
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -120,7 +123,11 @@ export default function LandingPage() {
                         </p>
 
                         <div className="hero-line flex flex-col sm:flex-row gap-5 pt-4">
-                            <button className="group h-16 px-10 bg-white text-black font-bold rounded-2xl flex items-center justify-center gap-3 hover:scale-[1.02] transition-all">
+                            <button className="group h-16 px-10 bg-white text-black font-bold rounded-2xl flex items-center justify-center gap-3 hover:scale-[1.02] transition-all"
+                                onClick={()=>{
+                                    router.push("/dashboard")
+                                }}
+                            >
                                 Get Started for Free
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </button>
