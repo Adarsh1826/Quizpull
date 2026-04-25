@@ -16,7 +16,7 @@ export default function UploadSection(
 
   return (
     <div
-      className={`bg-[#0a0a0a] border rounded-2xl p-8 h-full flex flex-col justify-center transition-all cursor-pointer
+      className={` border rounded-2xl p-8 h-full flex flex-col justify-center transition-all cursor-pointer
       ${dragActive ? "border-white/40 bg-white/5" : "border-white/10 hover:border-white/20"}
       border-dashed`}
       onDragOver={(e) => {
@@ -29,6 +29,7 @@ export default function UploadSection(
         setDragActive(false);
         handleFile(e.dataTransfer.files?.[0]);
       }}
+      
     >
       <div className="flex flex-col items-center text-center space-y-4">
         <div className="p-4 bg-white/5 rounded-full group-hover:scale-110 transition-transform">

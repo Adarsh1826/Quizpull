@@ -21,7 +21,7 @@ export default function Navbar({ isGuest }: NavbarProps) {
 
   
   return (
-    <header className="h-20 border-b border-white/5 bg-[#050505]/50 backdrop-blur-md px-6 md:px-10 flex items-center justify-between z-40">
+    <header className="h-20 border-b border-white/5  backdrop-blur-md px-6 md:px-10 flex items-center justify-between z-40" style={{ background: "radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99,102,241,0.07) 0%, transparent 60%)" }}>
       
       {/* Search Bar / Title Area */}
       <div className="flex items-center gap-4 w-full max-w-md">

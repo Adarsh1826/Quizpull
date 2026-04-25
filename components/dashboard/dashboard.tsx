@@ -15,7 +15,7 @@ export default function DashboardPage() {
   const [hasGeneratedQuiz, setHasGeneratedQuiz] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-[#050505] text-[#ededed] selection:bg-white selection:text-black">
+    <div className="flex min-h-screen  text-[#ededed] selection:bg-white selection:text-black" style={{ background: "radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99,102,241,0.07) 0%, transparent 60%)" }}>
       {/* Sidebar - Fixed width */}
       <Sidebar isGuest={isGuest} />
 

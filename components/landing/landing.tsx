@@ -78,10 +78,10 @@ export default function LandingPage() {
 
 
     return (
-        <div className="min-h-screen bg-[#000] text-[#ededed] selection:bg-white selection:text-black">
+        <div className="min-h-screen  text-[#ededed] selection:bg-white selection:text-black" style={{ background: "radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99,102,241,0.07) 0%, transparent 60%)" }}>
 
             {/* NAVBAR */}
-            <nav className="fixed top-0 w-full z-[100] border-b border-white/5 backdrop-blur-xl bg-black/50">
+            <nav className="fixed top-0 w-full z-[100] border-b border-white/5 backdrop-blur-xl " style={{ background: "radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99,102,241,0.07) 0%, transparent 60%)" }}>
                 <div className="max-w-[1400px] mx-auto px-6 md:px-12 h-20 flex justify-between items-center">
                     <div className="flex items-center gap-2 group cursor-pointer">
                         <div className="w-5 h-5 bg-white rotate-45 group-hover:rotate-180 transition-transform duration-500" />

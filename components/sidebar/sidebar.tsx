@@ -27,7 +27,7 @@ export default function Sidebar({ isGuest }: { isGuest: boolean }) {
   
 
   return (
-    <aside className="w-64 border-r border-white/5 bg-[#080808] hidden md:flex flex-col">
+    <aside className="w-64 border-r border-white/5  hidden md:flex flex-col" style={{ background: "radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99,102,241,0.07) 0%, transparent 60%)" }}>
       <div className="p-6 flex items-center gap-3">
         <div className="w-6 h-6 bg-white rounded-sm" />
         <span className="font-bold tracking-tighter text-lg uppercase">QUIZPULL.ai</span>
