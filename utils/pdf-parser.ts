@@ -11,7 +11,7 @@ export async function extractPdfFileContent(url: string): Promise<string> {
 
     const { text } = await extractText(buffer, { mergePages: true });
 
-    //console.log("Extracted text:", text.slice(0, 200));
+    console.log("Extracted text:", text);
     return text;
 
   } catch (error) {

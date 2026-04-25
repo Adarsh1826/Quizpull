@@ -1,58 +1,9 @@
-// "use client";
-// import { useEffect, useState } from "react";
-// import { getUser } from "@/utils/auth";
-// import { fetchUploadFile } from "@/utils/fetch";
-// import { extractPdfFileContent } from "@/utils/pdf-parser";
-// export default function AllFilePage() {
-//   const [files, setFiles] = useState<any[]>([]);
-//   const [user, setUser] = useState("");
-//   useEffect(() => {
-//     const loadData = async () => {
-//       const userData = await getUser();
-//       if (!userData?.id) return;
-//       setUser(userData.id);
-
-//       const filesData = await fetchUploadFile(userData.id);
-//       setFiles(filesData ?? []);
-
-
-//       filesData?.forEach(async (file) => {
-//         const text = await extractPdfFileContent(file.file_url);
-//         //console.log("PDF Text:", text);
-//       });
-//     };
-
-//     loadData();
-//   }, []);
-
-
-//   return (
-//     <div className="p-6 text-white">
-//       <h1 className="text-xl font-bold mb-4">Your Files</h1>
-
-//       {files.length === 0 ? (
-//         <p>No files uploaded</p>
-//       ) : (
-//         files.map((file) => (
-//           <a
-//             href={file.file_url}
-//             key={file.id}
-//             className="p-3 border border-white/10 rounded-lg mb-2"
-//           >
-//             {file.file_url}
-//           </a>
-//         ))
-//       )}
-//     </div>
-//   );
-// }
-
 "use client";
 import { useEffect, useState } from "react";
 import { getUser } from "@/utils/auth";
-import { fetchUploadFile } from "@/utils/fetch";
-import { extractPdfFileContent } from "@/utils/pdf-parser";
+import { fetchUploadFile } from "@/utils/fetch-uploadedFile";
 import { useRouter } from "next/navigation";
+import { supabase } from "@/utils/client";
 
 export default function AllFilePage() {
   const router = useRouter();
@@ -74,37 +25,50 @@ export default function AllFilePage() {
     loadData();
   }, []);
 
-  // const handleStartQuiz = async (file: any) => {
-  //   setLoadingFileId(file.id);
-  //   setQuizText(null);
-  //   const text = await extractPdfFileContent(file.file_url);
-  //   setQuizText(text);
-  //   setLoadingFileId(null);
-  // };
-  const handleStartQuiz = (file: any) => {
-    router.push(`/quizarena/${file.id}`);
+
+  const handleStartQuiz = async (file: any) => {
+    try {
+      setLoadingFileId(file.id);
+
+      // 1. extract text from PDF
+      const res = await fetch("/api/extract-text", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url: file.file_url }),
+      });
+
+      const { text } = await res.json();
+
+      if (!text) throw new Error("No text extracted");
+
+      // 2. send to your quiz generator endpoint
+      const quizRes = await fetch("/api/llm", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text }),
+      });
+
+      const quizData = await quizRes.json();
+      await supabase.from("pdfs").update({
+        questions: quizData
+      }).eq("id", file.id)
+
+
+      router.push(`/quizarena/${file.id}`)
+      // optional: just show raw for now
+      setQuizText(JSON.stringify(quizData, null, 2));
+
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoadingFileId(null);
+    }
   };
-
-  // Quiz Section
-  if (quizText) {
-    return (
-      <div className="p-6 text-white">
-        <button
-          onClick={() => setQuizText(null)}
-          className="mb-6 flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
-        >
-          ← Back to files
-        </button>
-        <h1 className="text-xl font-bold mb-2">Quiz Arena ⚔️</h1>
-        <p className="text-white/40 text-sm mb-6">PDF content extracted and ready</p>
-        <div className="p-4 bg-white/5 border border-white/10 rounded-xl text-sm text-white/70 whitespace-pre-wrap max-h-96 overflow-y-auto">
-          {quizText}
-        </div>
-        {/* plug in your quiz component here and pass quizText as prop */}
-      </div>
-    );
-  }
-
+  
   // File List
   return (
     <div className="p-6 text-white">
@@ -123,8 +87,8 @@ export default function AllFilePage() {
               <div className="flex items-center gap-3 min-w-0">
                 <div className="w-9 h-9 rounded-lg bg-rose-500/10 border border-rose-500/20 flex items-center justify-center flex-shrink-0">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f87171" strokeWidth="2">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                    <polyline points="14 2 14 8 20 8"/>
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
                   </svg>
                 </div>
                 <div className="min-w-0">
