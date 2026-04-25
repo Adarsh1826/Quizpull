@@ -1,49 +1,20 @@
 "use client";
-
 import { useEffect, useState } from "react";
-import { supabase } from "@/utils/client";
-
+import { getUser } from "@/utils/auth";
+import { fetchUploadFile } from "@/utils/fetch";
 export default function AllFilePage() {
   const [files, setFiles] = useState<any[]>([]);
-  const [user, setUser] = useState<any>(null);
-
-  // 1. get user
-  const getUser = async () => {
-    const { data, error } = await supabase.auth.getUser();
-
-    if (error) {
-      console.log(error.message);
-      return null;
-    }
-
-    return data.user;
-  };
-
-  // 2. fetch files
-  const fetchFiles = async (userId: string) => {
-    const { data, error } = await supabase
-      .from("pdfs")
-      .select("*")
-      .eq("user_id", userId);
-
-    if (error) {
-      console.log(error.message);
-      return [];
-    }
-
-    return data;
-  };
-
-  // 3. load everything
+  const [user, setUser] = useState("");
   useEffect(() => {
     const loadData = async () => {
       const userData = await getUser();
-      setUser(userData);
+      if (!userData?.id) return;
+      setUser(userData.id);
 
       if (!userData) return;
 
-      const filesData = await fetchFiles(userData.id);
-      setFiles(filesData);
+      const filesData = await fetchUploadFile(userData.id);
+      setFiles(filesData ??[]);
     };
 
     loadData();
@@ -57,12 +28,13 @@ export default function AllFilePage() {
         <p>No files uploaded</p>
       ) : (
         files.map((file) => (
-          <div
+          <a
+            href={file.file_url}
             key={file.id}
             className="p-3 border border-white/10 rounded-lg mb-2"
           >
-            {file.file_name}
-          </div>
+            {file.file_url}
+          </a>
         ))
       )}
     </div>

@@ -3,40 +3,17 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
-import { supabase } from "@/utils/client";
+import { handleLogin,handleSignup } from "@/utils/auth";
+import { useRouter } from "next/navigation";
 export default function AuthPage() {
+     const router = useRouter();
     const url = usePathname();
     const page = url.split("/").pop();
 
-    const isLogin = page === "login";
-
+    const isLogin = page === "signin";
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
-
-    const handleLogin  = async()=>{
-        try {
-           const {data,error} =  await supabase.auth.signInWithPassword({
-            email:email,
-             password:password
-            })
-        } catch (error) {
-            console.log("Error");
-            
-        }
-    }
-
-    const handleSignup = async()=>{
-        try {
-            const {data,error} = await supabase.auth.signUp({
-                email:email,
-                password:password
-            }) 
-        } catch (error) {
-            console.log(error);
-            
-        }
-    }
-
+   
     return (
         <div className="flex items-center justify-center min-h-screen max-w-full bg-black">
 
@@ -105,12 +82,12 @@ export default function AuthPage() {
 
                         {isLogin ? (<>
                         <button className="w-full py-2 bg-white text-black rounded-lg 
-                               hover:opacity-90 transition font-medium" onClick={handleLogin}>
+                               hover:opacity-90 transition font-medium" onClick={()=>handleLogin(email,password,router)}>
                             Sign In
                         </button>
                         </>):(<>
                         <button className="w-full py-2 bg-white text-black rounded-lg 
-                               hover:opacity-90 transition font-medium" onClick={handleSignup}>
+                               hover:opacity-90 transition font-medium" onClick={()=> handleSignup(email,password,router)}>
                            Sign Up
                         </button>
                         </>)}
@@ -141,7 +118,7 @@ export default function AuthPage() {
                     ) : (
                         <>
                             Already have an account?{" "}
-                            <Link href="/auth/login" className="text-white hover:underline">
+                            <Link href="/auth/signin" className="text-white hover:underline">
                                 Sign in
                             </Link>
                         </>

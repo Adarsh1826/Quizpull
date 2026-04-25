@@ -1,27 +1,18 @@
 import { supabase } from "./client";
-// This function is to upload pdf file to supabase bucket
-
-
+import { getUser } from "./auth";
+// This function for uploading to storage
 export default async function uploadFileToBucket(file: any) {
   try {
+    const user = await getUser();
+    const id = user ? user.id : null;
    
-    const { data: userData, error: userError } =
-      await supabase.auth.getUser();
-
-    // if (userError || !userData.user) {
-    //   console.log("User not found");
-    //   return;
-    // }
-
-    // const user = userData.user;
-
-    // 2. create file name
+    const folder = id ? id : 'guest';
     const fileName = `${Date.now()}-${file.name}`;
+    const filePath = `${folder}/${fileName}`;  
 
-    // 3. upload to storage
     const { data, error } = await supabase.storage
       .from("content")
-      .upload(fileName, file);
+      .upload(filePath, file);  
 
     if (error) {
       console.log(error.message);
@@ -30,53 +21,26 @@ export default async function uploadFileToBucket(file: any) {
 
     console.log("File uploaded successfully");
 
-    
     const { data: urlData } = supabase.storage
       .from("content")
       .getPublicUrl(data.path);
 
     const fileUrl = urlData.publicUrl;
 
-    // 5. save in table
-    await addInTable(fileName, fileUrl);
+    await addInTable(fileName, fileUrl, id);
 
   } catch (error) {
     console.log(error);
   }
 }
+// This function is for adding into table
 
-// This function is to store the file in the supabase table
-export  async function addInTable(file_name:string ,file_url:string,user_id? :string,question?:any){
-    const {data,error} = await supabase.from("pdfs").insert({
-        user_id,
-        question,
-        file_name,
-        file_url
-    })
-    return data;
+export async function addInTable(file_name: string, file_url: string, user_id?: string | null, question?: any) {
+  const { data, error } = await supabase.from("pdfs").insert({
+    user_id,
+    question,
+    file_name,
+    file_url
+  });
+  return data;
 }
-
-// This function fetches all uploaded file of the user
-
-export async function fetchUploadFile(user_id:string){
-   try {
-    const {data,error} = await supabase.from("pdfs").select("*").eq("user_id",user_id)
-    console.log("Fetched Successfully");
-    
-    return data;
-
-   } catch (error) {
-    console.log(error);
-    
-   }
-}
-const getUser = async () => {
-    const { data, error } = await supabase.auth.getUser();
-
-    if (error) {
-      console.log(error.message);
-      return null;
-    }
-
-    return data.user;
-};

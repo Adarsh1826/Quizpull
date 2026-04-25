@@ -1,12 +1,30 @@
+"use client"
 import { LayoutDashboard, Zap, History, BarChart3, Lock, LogOut, UserCircle } from "lucide-react";
-
+import { getUser } from "@/utils/auth";
+import { useEffect ,useState } from "react";
+import { useRouter } from "next/navigation";
+import { handleLogout } from "@/utils/auth";
 export default function Sidebar({ isGuest }: { isGuest: boolean }) {
+  const router = useRouter()
   const navItems = [
     { name: "Dashboard", icon: LayoutDashboard, locked: false },
     { name: "Generate Quiz", icon: Zap, locked: false },
     { name: "History", icon: History, locked: isGuest },
     { name: "Analytics", icon: BarChart3, locked: isGuest },
   ];
+  const [activeUser, setActiveUser] = useState("");
+  const fetchActiveUser = async () => {
+    const user = await getUser();
+    setActiveUser(user?.email!)
+  }
+
+  
+  useEffect(() => {
+    fetchActiveUser();
+  }, [])
+
+
+  
 
   return (
     <aside className="w-64 border-r border-white/5 bg-[#080808] hidden md:flex flex-col">
@@ -19,9 +37,8 @@ export default function Sidebar({ isGuest }: { isGuest: boolean }) {
         {navItems.map((item) => (
           <button
             key={item.name}
-            className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all ${
-              item.locked ? "opacity-50 cursor-not-allowed" : "hover:bg-white/5 text-neutral-400 hover:text-white"
-            }`}
+            className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all ${item.locked ? "opacity-50 cursor-not-allowed" : "hover:bg-white/5 text-neutral-400 hover:text-white"
+              }`}
           >
             <div className="flex items-center gap-3">
               <item.icon size={18} />
@@ -33,15 +50,20 @@ export default function Sidebar({ isGuest }: { isGuest: boolean }) {
       </nav>
 
       <div className="p-4 border-t border-white/5">
-        {isGuest ? (
+        {!activeUser ? (
           <div className="bg-white/5 rounded-xl p-4 border border-white/10">
             <p className="text-[11px] uppercase tracking-widest font-bold text-neutral-500 mb-3">Guest Mode</p>
-            <button className="w-full py-2 bg-white text-black text-xs font-bold rounded-lg hover:bg-neutral-200 transition-colors">
+            <button className="w-full py-2 bg-white text-black text-xs font-bold rounded-lg hover:bg-neutral-200 transition-colors"
+              onClick={()=>{
+                router.push("/auth/signin")
+              }}
+            >
               Sign in to Save
             </button>
           </div>
         ) : (
-          <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-red-400 hover:bg-red-500/10 transition-all">
+          <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-red-400 hover:bg-red-500/10 transition-all"
+          onClick={()=>handleLogout(router)}>
             <LogOut size={18} />
             Logout
           </button>

@@ -91,7 +91,7 @@ export default function LandingPage() {
                     <div className="hidden md:flex items-center gap-10">
 
                         <div className="h-4 w-[1px] bg-white/10" />
-                        <Link href="/auth/login" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Log in</Link>
+                        <Link href="/auth/signin" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Log in</Link>
 
                     </div>
 

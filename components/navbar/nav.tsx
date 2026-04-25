@@ -1,11 +1,25 @@
 "use client";
 import { Search, Bell, UserCircle } from "lucide-react";
+import { getUser } from "@/utils/auth";
+import { useEffect, useState } from "react";
 
 interface NavbarProps {
   isGuest: boolean;
 }
 
 export default function Navbar({ isGuest }: NavbarProps) {
+  const [activeUser , setActiveUser] = useState("");
+  const fetchActiveUser = async()=>{
+    const user = await getUser();
+    setActiveUser(user?.email!)
+  }
+
+
+  useEffect(()=>{
+    fetchActiveUser();
+  },[])
+
+  
   return (
     <header className="h-20 border-b border-white/5 bg-[#050505]/50 backdrop-blur-md px-6 md:px-10 flex items-center justify-between z-40">
       
@@ -35,10 +49,17 @@ export default function Navbar({ isGuest }: NavbarProps) {
         <div className="flex items-center gap-3 pl-6 border-l border-white/10">
           <div className="text-right hidden sm:block">
             <p className="text-xs font-bold text-white leading-none mb-1">
-              {isGuest ? "Guest User" : "Alex Rivier"}
+                {!activeUser?(
+                  <>
+                    Guest User
+                    
+                  </>
+                ):<>
+                  {activeUser}
+                </>}
             </p>
             <p className="text-[10px] text-neutral-500 uppercase tracking-widest">
-              {isGuest ? "Limited Access" : "Pro Plan"}
+              {activeUser ? "Pro Plan" : "Limited Access"}
             </p>
           </div>
           
@@ -46,7 +67,7 @@ export default function Navbar({ isGuest }: NavbarProps) {
             {isGuest ? (
               <UserCircle size={24} className="text-neutral-600" />
             ) : (
-              // Replace with an actual <Image /> if you have one
+                
               <div className="w-full h-full bg-gradient-to-br from-neutral-700 to-neutral-900" />
             )}
           </div>
