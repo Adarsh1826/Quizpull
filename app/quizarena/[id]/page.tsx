@@ -1,10 +1,8 @@
-// app/quizarena/[id]/page.tsx
-import QuizArena from "@/components/arena/arena";// move component to components folder
+import QuizArena from "@/components/arena/arena";
 
-interface Props {
-  params: { id: string };
-}
+export default async function QuizArenaPage({ params }: any) {
+  const resolvedParams = await params; 
+  const fileId = Number(resolvedParams.id); 
 
-export default function QuizArenaPage({ params }: Props) {
-  return <QuizArena fileId={params.id} />;
+  return <QuizArena  />;
 }
