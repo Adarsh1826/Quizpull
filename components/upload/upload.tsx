@@ -135,13 +135,11 @@ export default function UploadSection({ onUploadSuccess }: UploadSectionProps) {
     setUploading(true);
     try {
       if (activeUser) {
-        // Logged-in: upload to Supabase storage, get back the new DB record
         const newFile = await uploadFileToBucket(file);
         if (newFile && onUploadSuccess) {
           onUploadSuccess(newFile);
         }
       } else {
-        // Guest: save to IndexedDB, then surface the newest record
         await saveGuestPdf(file);
         const allGuest = await getAllGuestPdfs();
         const newest = allGuest[allGuest.length - 1];
