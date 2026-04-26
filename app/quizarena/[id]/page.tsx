@@ -1,8 +1,13 @@
+"use client"
+import { usePathname } from "next/navigation";
 import QuizArena from "@/components/arena/arena";
 
-export default async function QuizArenaPage({ params }: any) {
-  const resolvedParams = await params; 
-  const fileId = Number(resolvedParams.id); 
+export default async function QuizArenaPage() {
+  const route  = usePathname();
+  const fileId = Number(route.split('/').pop());
 
-  return <QuizArena  />;
+  // console.log("filed id  ", fileId);
+  
+
+  return <QuizArena fileId ={fileId} />;
 }
