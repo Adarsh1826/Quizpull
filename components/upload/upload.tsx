@@ -2,18 +2,41 @@
 
 import { UploadCloud, FileText } from "lucide-react";
 import uplaodFileToBucket from "@/utils/upload";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getUser } from "@/utils/auth";
+import { saveGuestPdf } from "@/utils/db";
 
 export default function UploadSection(
 ) {
   const [file, setFile] = useState<File | null>(null);
   const [dragActive, setDragActive] = useState(false);
+  const [activeUser,setActiveUser] = useState("")
 
   const handleFile = (file: File | undefined) => {
     if (!file) return;
     setFile(file);
   };
 
+  useEffect(()=>{
+    const test = async ()=>{
+      const us = await getUser();
+      setActiveUser(us?.email!)
+    }
+    test();
+  },[])
+  const handleUpload= async()=>{
+    if(activeUser){
+      // user exist
+      console.log("Uploaded to storage");
+      
+      await uplaodFileToBucket(file)
+    }
+    else{
+      console.log("Saved to local db");
+      
+      await saveGuestPdf(file!)
+    }
+  }
   return (
     <div
       className={` border rounded-2xl p-8 h-full flex flex-col justify-center transition-all cursor-pointer
@@ -62,7 +85,7 @@ export default function UploadSection(
 
         {/* Button */}
         <button
-          onClick={ ()=>  uplaodFileToBucket(file)}
+          onClick={ handleUpload}
           className="px-6 py-2 bg-white text-black font-semibold rounded-full text-sm mt-4 active:scale-95 transition-transform hover:bg-gray-200"
         >
           Upload
