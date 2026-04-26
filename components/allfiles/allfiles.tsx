@@ -5,6 +5,7 @@ import { fetchUploadFile } from "@/utils/fetch-uploadedFile";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/utils/client";
 import { getAllGuestPdfs } from "@/utils/db";
+import { clearGuestPdfs } from "@/utils/db";
 
 export default function AllFilePage() {
   const router = useRouter();
@@ -21,6 +22,7 @@ export default function AllFilePage() {
         // Logged in 
         setUser(userData.id);
         setIsGuest(false);
+        await clearGuestPdfs();
         const filesData = await fetchUploadFile(userData.id);
         setFiles(filesData ?? []);
       } else {
