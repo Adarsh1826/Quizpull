@@ -61,7 +61,6 @@ export default function DashboardPage() {
   const [isGuest, setIsGuest] = useState(true);
   const [hasGeneratedQuiz, setHasGeneratedQuiz] = useState(false);
 
-  // Shared state: UploadSection sets this, AllFilePage reads it
   const [latestUpload, setLatestUpload] = useState<any>(null);
 
   return (
@@ -93,8 +92,6 @@ export default function DashboardPage() {
             <HistorySection isGuest={isGuest} />
           </section>
         </div>
-
-        {/* Pass latestUpload so AllFilePage prepends it instantly */}
         <AllFilePage newFile={latestUpload} />
       </main>
     </div>

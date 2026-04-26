@@ -184,7 +184,6 @@ export const AllFilePage: React.FC<AllFilePageProps> = ({ newFile }) => {
     loadData();
   }, []);
 
-  // FEATURE 2: Instantly prepend a newly uploaded file without page reload
   useEffect(() => {
     if (!newFile) return;
     setFiles((prev) => {
