@@ -17,8 +17,6 @@ export async function DELETE(req: Request) {
       );
     }
 
-    // Derive the storage path from the public URL
-    // Public URL format: .../storage/v1/object/public/content/<userId>/<filename>
     const storagePathMatch = fileUrl?.match(/\/object\/public\/content\/(.+)$/);
     if (storagePathMatch) {
       const storagePath = storagePathMatch[1];
@@ -28,16 +26,15 @@ export async function DELETE(req: Request) {
 
       if (storageError) {
         console.error("Storage delete error:", storageError.message);
-        // Continue anyway — still delete the DB row
       }
     }
 
-    // Delete the row from the pdfs table
+
     const { error: dbError } = await supabase
       .from("pdfs")
       .delete()
       .eq("id", fileId)
-      .eq("user_id", userId); // Safety: only owner can delete
+      .eq("user_id", userId);
 
     if (dbError) {
       return NextResponse.json(
