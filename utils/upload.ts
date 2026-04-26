@@ -47,9 +47,6 @@
 
 import { supabase } from "./client";
 import { getUser } from "./auth";
-
-// Upload file to Supabase Storage and insert a row into the pdfs table.
-// Returns the newly created DB record so the UI can add it instantly.
 export default async function uploadFileToBucket(file: any) {
   try {
     const user = await getUser();
@@ -73,8 +70,6 @@ export default async function uploadFileToBucket(file: any) {
       .getPublicUrl(data.path);
 
     const fileUrl = urlData.publicUrl;
-
-    // Insert into DB and return the new row
     const newRecord = await addInTable(fileName, fileUrl, id);
     return newRecord;
   } catch (error) {
@@ -82,8 +77,6 @@ export default async function uploadFileToBucket(file: any) {
     return null;
   }
 }
-
-// Insert into pdfs table and return the inserted row
 export async function addInTable(
   file_name: string,
   file_url: string,
@@ -93,7 +86,7 @@ export async function addInTable(
   const { data, error } = await supabase
     .from("pdfs")
     .insert({ user_id, question, file_name, file_url })
-    .select()   // returns the inserted row
+    .select()   
     .single();
 
   if (error) {
