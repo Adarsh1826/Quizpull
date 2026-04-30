@@ -27,9 +27,9 @@ export default function AuthPage() {
                         rounded-2xl shadow-2xl">
 
                     {/* Logo */}
-                    <div className="mb-4 text-2xl font-bold text-white">
+                    {/* <div className="mb-4 text-2xl font-bold text-white">
                         Logo
-                    </div>
+                    </div> */}
 
                     {/* Text Section */}
                     <div className="text-center mb-6">
