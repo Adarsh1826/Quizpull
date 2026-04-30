@@ -1,25 +1,49 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+import { cookies } from "next/headers";
+import { createServerClient } from "@supabase/ssr";
 
 export async function DELETE(req: Request) {
   try {
-    const { fileId, fileUrl, userId } = await req.json();
+    const cookieStore = await cookies();
 
-    if (!fileId || !userId) {
-      return NextResponse.json(
-        { error: "Missing fileId or userId" },
-        { status: 400 }
-      );
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll() {
+            return cookieStore.getAll();
+          },
+          setAll(cookiesToSet) {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options)
+            );
+          },
+        },
+      }
+    );
+
+   
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    console.log("USER:", user);
+
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const storagePathMatch = fileUrl?.match(/\/object\/public\/content\/(.+)$/);
+    const { id, file_url } = await req.json();
+
+    
+    const storagePathMatch = file_url?.match(
+      /\/object\/public\/content\/(.+)$/
+    );
+
     if (storagePathMatch) {
       const storagePath = storagePathMatch[1];
+
       const { error: storageError } = await supabase.storage
         .from("content")
         .remove([storagePath]);
@@ -29,23 +53,30 @@ export async function DELETE(req: Request) {
       }
     }
 
-
-    const { error: dbError } = await supabase
+    
+    const { data, error } = await supabase
       .from("pdfs")
       .delete()
-      .eq("id", fileId)
-      .eq("user_id", userId);
+      .eq("id", id)
+      .eq("user_id", user.id)
+      .select();
 
-    if (dbError) {
+    console.log("DELETED:", data);
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    if (!data || data.length === 0) {
       return NextResponse.json(
-        { error: "Failed to delete from database" },
-        { status: 500 }
+        { error: "Delete blocked by RLS" },
+        { status: 403 }
       );
     }
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error("Delete file error:", err);
+    console.error("Delete error:", err);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

@@ -206,13 +206,18 @@ export const AllFilePage: React.FC<AllFilePageProps> = ({ newFile }) => {
         await deleteGuestPdf(file.id);
         setFiles((prev) => prev.filter((f) => f.id !== file.id));
       } else {
+        console.log(file.id);
+        console.log(userId);
+        
+        
         const res = await fetch("/api/delete-file", {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
+          credentials:"include",
           body: JSON.stringify({
-            fileId: file.id,
-            fileUrl: file.file_url,
-            userId,
+            id: file.id,
+            file_url: file.file_url,
+            user_id:userId,
           }),
         });
         if (!res.ok) {
