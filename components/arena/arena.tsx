@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { fetchAllProblemOfSinglePdf } from "@/utils/fetch-problem";
+import { useStats } from "@/context/context";
 
 type Mode = "timed" | "practice" | null;
 
@@ -27,6 +28,7 @@ export default function QuizArena({ fileId }: { fileId: number }) {
   const [results, setResults] = useState<{ correct: boolean }[]>([]);
   const [quizTitle, setQuizTitle] = useState("");
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const { updateAfterAnswer, finishQuiz } = useStats();
 
   useEffect(() => {
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
@@ -89,12 +91,14 @@ export default function QuizArena({ fileId }: { fileId: number }) {
     setSelectedOption(idx);
     setAnswered(true);
     const isCorrect = idx === getCorrectIdx(questions[currentIndex]);
+    updateAfterAnswer(isCorrect);
     if (isCorrect) setScore((s) => s + 1);
     setResults((r) => [...r, { correct: isCorrect }]);
   };
 
   const handleNext = () => {
     if (currentIndex + 1 >= questions.length) {
+      finishQuiz(); 
       setFinished(true);
     } else {
       setCurrentIndex((i) => i + 1);
