@@ -64,3 +64,15 @@ export const handleLogout = async (router: any) => {
     }
 
 }
+
+
+// signin / signup with google 
+export const handleAuthWithGoogle = async()=>{
+    try {
+        const {data,error} = await supabase.auth.signInWithOAuth({
+            provider:"google"
+        })
+    } catch (error) {
+        
+    }
+}

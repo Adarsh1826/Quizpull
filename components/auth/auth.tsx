@@ -3,8 +3,9 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
-import { handleLogin,handleSignup } from "@/utils/auth";
+import { handleLogin,handleSignup ,handleAuthWithGoogle} from "@/utils/auth";
 import { useRouter } from "next/navigation";
+
 export default function AuthPage() {
      const router = useRouter();
     const url = usePathname();
@@ -100,7 +101,8 @@ export default function AuthPage() {
                         </div>
 
                         <button className="w-full py-2 bg-transparent text-white rounded-lg 
-                               border border-white/20 hover:bg-white/10 transition">
+                               border border-white/20 hover:bg-white/10 transition"
+                               onClick={handleAuthWithGoogle}>
                             Continue with Google
                         </button>
                     </div>
