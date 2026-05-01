@@ -106,11 +106,36 @@ export default function LandingPage() {
                 <div className="grid lg:grid-cols-[1.1fr,0.9fr] gap-20 items-start">
 
                     <div className="space-y-10">
-                        <div className="hero-line inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-white/10 bg-white/5">
+                        {/* <div className="hero-line inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-white/10 bg-white/5">
                             <div className="flex -space-x-2">
                                 {[1, 2, 3].map(i => <div key={i} className="w-5 h-5 rounded-full border-2 border-black bg-green-400" />)}
                             </div>
                             <span className="text-[11px] uppercase tracking-widest font-semibold text-neutral-400 italic">Used by 2k+ Researchers</span>
+                        </div> */}
+
+                        <div className="hero-line inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-white/10 bg-white/5">
+
+                           <div className="flex -space-x-3 items-center">
+                               {[
+                                   "/avatars/a1.png",
+                                   "/avatars/a2.png",
+                                   "/avatars/a3.png",
+                                   "/avatars/a4.png",
+                               ].map((src, i) => (
+                                   <img
+                                       key={i}
+                                       src={src}
+                                       alt="user"
+                                       className="w-6 h-6 rounded-full border-2 border-black object-cover"
+                                   />
+                               ))}
+
+                           </div>
+
+                            <span className="text-[11px] uppercase tracking-widest font-semibold text-neutral-400 italic">
+                                Used by 2k+ Researchers
+                            </span>
+                                                
                         </div>
 
                         <h1 className="text-6xl md:text-8xl font-bold tracking-tighter leading-[0.95] mb-8">
