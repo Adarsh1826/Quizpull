@@ -131,9 +131,9 @@ export default function LandingPage() {
                                 Get Started for Free
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </button>
-                            <button className="h-16 px-10 border border-white/10 bg-white/5 font-bold rounded-2xl hover:bg-white/10 transition-all">
+                            {/* <button className="h-16 px-10 border border-white/10 bg-white/5 font-bold rounded-2xl hover:bg-white/10 transition-all">
                                 Watch Methodology
-                            </button>
+                            </button> */}
                         </div>
                     </div>
 
@@ -216,8 +216,8 @@ export default function LandingPage() {
                     {[
                         { q: "How secure are my uploaded documents?", a: "We use enterprise-grade AES-256 encryption. Your PDFs are processed in secure sandboxes and are never used to train global AI models." },
                         { q: "Which languages are supported?", a: "Quiz.ai currently supports over 45 languages, including English, Spanish, Mandarin, and Japanese, with full mathematical notation support." },
-                        { q: "Is there a student discount available?", a: "Absolutely. Verified students receive 50% off our Pro plan. Contact our support team with your .edu email." },
-                        { q: "Can I collaborate with a study group?", a: "Yes, our Teams plan allows you to share quiz sets, track group progress, and compete in live study leaderboards." }
+                        // { q: "Is there a student discount available?", a: "Absolutely. Verified students receive 50% off our Pro plan. Contact our support team with your .edu email." },
+                        // { q: "Can I collaborate with a study group?", a: "Yes, our Teams plan allows you to share quiz sets, track group progress, and compete in live study leaderboards." }
                     ].map((item, i) => (
                         <Accordion key={i} question={item.q} answer={item.a} />
                     ))}
@@ -230,8 +230,8 @@ export default function LandingPage() {
                     <div className="relative z-10">
                         <h2 className="text-5xl md:text-8xl font-bold tracking-tighter mb-12">Stop reading.<br />Start mastering.</h2>
                         <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                            <button className="h-16 px-12 bg-white text-black font-bold rounded-2xl text-lg hover:scale-105 transition-all">Get Started Now</button>
-                            <button className="h-16 px-12 border border-white/10 bg-white/5 font-bold rounded-2xl text-lg hover:bg-white/10 transition-all">Contact Sales</button>
+                            {/* <button className="h-16 px-12 bg-white text-black font-bold rounded-2xl text-lg hover:scale-105 transition-all">Get Started Now</button>
+                            <button className="h-16 px-12 border border-white/10 bg-white/5 font-bold rounded-2xl text-lg hover:bg-white/10 transition-all">Contact Sales</button> */}
                         </div>
                     </div>
                     {/* Subtle background glow */}
