@@ -175,7 +175,9 @@ export default function AuthPage() {
 
             {/* Google */}
             <button
-              onClick={handleAuthWithGoogle}
+              onClick={()=>{
+                handleAuthWithGoogle(router)
+              }}
               className="w-full py-3 rounded-xl bg-transparent border border-white/[0.09] text-neutral-300 text-sm font-medium hover:bg-white/5 hover:border-white/15 active:scale-[0.98] transition-all flex items-center justify-center gap-2.5"
             >
               {/* Google Icon SVG */}
