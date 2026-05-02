@@ -82,7 +82,7 @@ export default function LandingPage() {
           "radial-gradient(ellipse 90% 60% at 50% -5%, rgba(139,92,246,0.18) 0%, transparent 55%)",
       }}
     >
-      {/* === GLOBAL GRID OVERLAY === */}
+      {/*GLOBAL GRID OVERLAY*/}
       <div
         className="fixed inset-0 pointer-events-none z-0"
         style={{
@@ -103,9 +103,7 @@ export default function LandingPage() {
         style={{ background: "radial-gradient(ellipse, rgba(124,58,237,0.07) 0%, transparent 70%)", filter: "blur(60px)" }}
       />
 
-      {/* ============================
-          NAVBAR
-      ============================ */}
+      {/*NAVBAR*/}
       <nav
         className="fixed top-0 w-full z-[100] border-b border-white/5 backdrop-blur-xl"
         style={{ background: "rgba(5,5,5,0.7)" }}
@@ -212,7 +210,6 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* === HERO VISUAL — Green Feature Card === */}
           <div className="relative hidden lg:block">
             {/* Purple glow behind card */}
             <div className="absolute inset-0 rounded-[2.5rem] pointer-events-none"
@@ -225,9 +222,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ============================
-          STATS STRIP
-      ============================ */}
+      {/*STATS STRIP*/}
       <section ref={statsRef} className="relative z-10 border-y border-white/5"
         style={{ background: "linear-gradient(90deg, rgba(139,92,246,0.04) 0%, rgba(5,5,5,0) 50%, rgba(139,92,246,0.04) 100%)" }}
       >
@@ -251,9 +246,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ============================
-          BENTO FEATURES
-      ============================ */}
+      {/*BENTO FEATURES*/}
       <section ref={featuresRef} id="features" className="relative z-10 px-6 md:px-12 py-40 max-w-[1400px] mx-auto">
         <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
@@ -418,9 +411,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ============================
-          FAQ SECTION
-      ============================ */}
+      {/*
+          FAQ SECTION */}
       <section id="faq" className="relative z-10 px-6 md:px-12 py-40 max-w-4xl mx-auto">
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 mb-6">
@@ -442,9 +434,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ============================
-          FINAL CTA
-      ============================ */}
+      {/*
+          FINAL CTA*/}
       <section className="relative z-10 px-6 md:px-12 pb-40">
         <div className="max-w-[1400px] mx-auto relative rounded-[3rem] p-12 md:p-32 text-center overflow-hidden border border-white/5"
           style={{ background: "linear-gradient(135deg, rgba(139,92,246,0.12) 0%, rgba(5,5,5,0.98) 50%, rgba(22,163,74,0.08) 100%)" }}
@@ -484,9 +475,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ============================
-          FOOTER
-      ============================ */}
+      {/*
+          FOOTER*/}
       <footer className="relative z-10 px-6 md:px-12 py-20 border-t border-white/5">
         <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-5 gap-12 mb-20">
           <div className="col-span-2">
@@ -521,9 +511,6 @@ export default function LandingPage() {
   );
 }
 
-// ─────────────────────────────────────────────
-// Developer / AI Quiz Card — Hero Section
-// ─────────────────────────────────────────────
 const TOPICS = [
   {
     id: "dsa",
