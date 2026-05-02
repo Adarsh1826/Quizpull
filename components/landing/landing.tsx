@@ -92,7 +92,7 @@ export default function LandingPage() {
         }}
       />
 
-      {/* === PURPLE AMBIENT GLOWS === */}
+      {/* PURPLE AMBIENT GLOWS */}
       <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full pointer-events-none z-0"
         style={{ background: "radial-gradient(ellipse, rgba(139,92,246,0.12) 0%, transparent 70%)", filter: "blur(40px)" }}
       />
@@ -143,9 +143,7 @@ export default function LandingPage() {
         )}
       </nav>
 
-      {/* ============================
-          HERO SECTION
-      ============================ */}
+      {/* HERO SECTION*/}
       <section ref={heroRef} className="relative z-10 pt-44 pb-32 px-6 md:px-12 max-w-[1400px] mx-auto">
         <div className="grid lg:grid-cols-[1fr,1fr] gap-16 items-center">
           <div className="space-y-8">
@@ -216,7 +214,7 @@ export default function LandingPage() {
               style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(139,92,246,0.25) 0%, transparent 70%)", filter: "blur(30px)", transform: "scale(1.1)" }}
             />
 
-            {/* ── DEV QUIZ CARD ── */}
+            {/*DEV QUIZ CARD*/}
             <DevQuizCard />
           </div>
         </div>
@@ -475,8 +473,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/*
-          FOOTER*/}
+      {/*FOOTER*/}
       <footer className="relative z-10 px-6 md:px-12 py-20 border-t border-white/5">
         <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-5 gap-12 mb-20">
           <div className="col-span-2">
