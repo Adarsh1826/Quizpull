@@ -21,20 +21,20 @@ export default function DashboardPage() {
   return (
     <div
       className="flex min-h-screen text-[#ededed] selection:bg-white selection:text-black"
-      style={{
-        background: "#050505",
-        backgroundImage:
-          "radial-gradient(ellipse 90% 60% at 50% -5%, rgba(139,92,246,0.18) 0%, transparent 55%)",
-      }}
+      // style={{
+      //   background: "#050505",
+      //   backgroundImage:
+      //     "radial-gradient(ellipse 90% 60% at 50% -5%, rgba(139,92,246,0.18) 0%, transparent 55%)",
+      // }}
     >
-      <div
+      {/* <div
         className="fixed inset-0 pointer-events-none z-0"
         style={{
           backgroundImage:
             "linear-gradient(rgba(139,92,246,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(139,92,246,0.04) 1px, transparent 1px)",
           backgroundSize: "80px 80px",
         }}
-      />
+      /> */}
       <Sidebar isGuest={isGuest} />
 
       <main className="flex-1 flex flex-col min-w-0 overflow-hidden">

@@ -76,24 +76,24 @@ export default function LandingPage() {
   return (
     <div
       className="min-h-screen text-[#ededed] selection:bg-white selection:text-black overflow-x-hidden"
-      style={{
-        background: "#050505",
-        backgroundImage:
-          "radial-gradient(ellipse 90% 60% at 50% -5%, rgba(139,92,246,0.18) 0%, transparent 55%)",
-      }}
+      // style={{
+      //   background: "#050505",
+      //   backgroundImage:
+      //     "radial-gradient(ellipse 90% 60% at 50% -5%, rgba(139,92,246,0.18) 0%, transparent 55%)",
+      // }}
     >
       {/*GLOBAL GRID OVERLAY*/}
-      <div
+      {/* <div
         className="fixed inset-0 pointer-events-none z-0"
         style={{
           backgroundImage:
             "linear-gradient(rgba(139,92,246,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(139,92,246,0.04) 1px, transparent 1px)",
           backgroundSize: "80px 80px",
         }}
-      />
+      /> */}
 
       {/* PURPLE AMBIENT GLOWS */}
-      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full pointer-events-none z-0"
+      {/* <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full pointer-events-none z-0"
         style={{ background: "radial-gradient(ellipse, rgba(139,92,246,0.12) 0%, transparent 70%)", filter: "blur(40px)" }}
       />
       <div className="fixed top-1/3 left-[-10%] w-[500px] h-[500px] rounded-full pointer-events-none z-0"
@@ -101,7 +101,7 @@ export default function LandingPage() {
       />
       <div className="fixed top-1/2 right-[-10%] w-[400px] h-[400px] rounded-full pointer-events-none z-0"
         style={{ background: "radial-gradient(ellipse, rgba(124,58,237,0.07) 0%, transparent 70%)", filter: "blur(60px)" }}
-      />
+      /> */}
 
       {/*NAVBAR*/}
 
@@ -122,7 +122,7 @@ export default function LandingPage() {
             <div className="h-4 w-[1px] bg-white/10" />
             <Link
               href="/dashboard"
-              className="text-sm font-semibold text-white px-5 py-2.5 "
+              className="text-sm font-semibold text-neutral-400 px-5 py-2.5 "
             >
               Dashboard →
             </Link>
@@ -138,13 +138,13 @@ export default function LandingPage() {
           <div className="md:hidden border-t border-white/5 px-6 py-6 flex flex-col gap-4 bg-[#050505]">
             <a href="#features" className="text-sm text-neutral-400 hover:text-white" onClick={() => setIsMenuOpen(false)}>Features</a>
             <a href="#faq" className="text-sm text-neutral-400 hover:text-white" onClick={() => setIsMenuOpen(false)}>FAQ</a>
-            <Link href="/dashboard" className="text-sm font-semibold text-white" onClick={() => setIsMenuOpen(false)}>Dashboard →</Link>
+            <Link href="/dashboard" className="text-sm font-semibold text-neutral-400" onClick={() => setIsMenuOpen(false)}>Dashboard →</Link>
           </div>
         )}
       </nav>
 
       {/* HERO SECTION*/}
-      <section ref={heroRef} className="relative z-10 pt-52 pb-32 px-6 md:px-12 max-w-[1400px] mx-auto">
+      <section ref={heroRef} className="relative z-10 pt-32 pb-32 px-6 md:px-12 max-w-[1400px] mx-auto">
         <div className="grid lg:grid-cols-[1fr,1fr] gap-16 items-center">
           <div className="space-y-8">
             {/* Green badge */}
@@ -191,9 +191,9 @@ export default function LandingPage() {
                 Get Started Free
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="h-14 px-10 border border-white/10 bg-white/5 font-bold rounded-2xl hover:bg-white/8 transition-all text-sm">
+              {/* <button className="h-14 px-10 border border-white/10 bg-white/5 font-bold rounded-2xl hover:bg-white/8 transition-all text-sm">
                 See how it works
-              </button>
+              </button> */}
             </div>
 
             {/* Avatars */}
@@ -211,9 +211,9 @@ export default function LandingPage() {
 
           <div className="relative hidden lg:block">
             {/* Purple glow behind card */}
-            <div className="absolute inset-0 rounded-[2.5rem] pointer-events-none"
+            {/* <div className="absolute inset-0 rounded-[2.5rem] pointer-events-none"
               style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(139,92,246,0.25) 0%, transparent 70%)", filter: "blur(30px)", transform: "scale(1.1)" }}
-            />
+            /> */}
 
             {/*DEV QUIZ CARD*/}
             <DevQuizCard />
@@ -223,7 +223,7 @@ export default function LandingPage() {
 
       {/*STATS STRIP*/}
       <section ref={statsRef} className="relative z-10 border-y border-white/5"
-        style={{ background: "linear-gradient(90deg, rgba(139,92,246,0.04) 0%, rgba(5,5,5,0) 50%, rgba(139,92,246,0.04) 100%)" }}
+        // style={{ background: "linear-gradient(90deg, rgba(139,92,246,0.04) 0%, rgba(5,5,5,0) 50%, rgba(139,92,246,0.04) 100%)" }}
       >
         <div className="max-w-[1400px] mx-auto px-12 py-16 grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
           {[
@@ -233,8 +233,8 @@ export default function LandingPage() {
             { label: "User Rating", val: 4.9, unit: "/5" },
           ].map((stat, i) => (
             <div key={i} className="relative group">
-              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-                style={{ background: "radial-gradient(ellipse, rgba(139,92,246,0.08) 0%, transparent 70%)" }}
+              <div className="absolute inset-0 rounded-2xl opacity-0 "
+                
               />
               <div className="text-4xl md:text-5xl font-bold tracking-tighter mb-2">
                 <span className="stat-value">{stat.val}</span>{stat.unit}
@@ -255,9 +255,9 @@ export default function LandingPage() {
             </div>
             <h2 className="text-4xl md:text-6xl font-bold tracking-tighter">Engineered for depth.</h2>
           </div>
-          <p className="text-neutral-500 max-w-xs text-sm leading-relaxed md:text-right">
+          {/* <p className="text-neutral-500 max-w-xs text-sm leading-relaxed md:text-right">
             Every feature built to close the gap between passive reading and true mastery.
-          </p>
+          </p> */}
         </div>
 
         {/* Bento Grid */}
@@ -322,10 +322,10 @@ export default function LandingPage() {
           <div className="feature-card md:col-span-4 relative rounded-[2rem] p-10 flex flex-col justify-between h-[420px] overflow-hidden group border border-white/5"
             style={{ background: "rgba(255,255,255,0.02)" }}
           >
-            <div className="absolute inset-0 pointer-events-none opacity-10"
+            <div className="absolute inset-0 pointer-events-none opacity-20"
               style={{
-                backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-                backgroundSize: "30px 30px",
+                backgroundImage: "linear-gradient(rgba(139,92,246,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(139,92,246,0.15) 1px, transparent 1px)",
+                backgroundSize: "40px 40px",
               }}
             />
             <div className="relative z-10">
@@ -352,8 +352,11 @@ export default function LandingPage() {
               <h3 className="text-2xl font-bold mb-3 tracking-tight">Adaptive AI</h3>
               <p className="text-neutral-500 text-base">Questions evolve based on your answers. The harder you think, the smarter it gets.</p>
             </div>
-            <div className="absolute top-0 right-0 w-32 h-32 rounded-full pointer-events-none"
-              style={{ background: "radial-gradient(ellipse, rgba(139,92,246,0.15) 0%, transparent 70%)", filter: "blur(20px)" }}
+            <div className="absolute inset-0 pointer-events-none opacity-20"
+              style={{
+                backgroundImage: "linear-gradient(rgba(139,92,246,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(139,92,246,0.15) 1px, transparent 1px)",
+                backgroundSize: "40px 40px",
+              }}
             />
           </div>
 
@@ -361,10 +364,10 @@ export default function LandingPage() {
           <div className="feature-card md:col-span-4 relative rounded-[2rem] p-10 flex flex-col justify-between h-[420px] overflow-hidden group border border-white/5"
             style={{ background: "rgba(255,255,255,0.01)" }}
           >
-            <div className="absolute inset-0 pointer-events-none opacity-10"
+            <div className="absolute inset-0 pointer-events-none opacity-20"
               style={{
-                backgroundImage: "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
-                backgroundSize: "25px 25px",
+                backgroundImage: "linear-gradient(rgba(139,92,246,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(139,92,246,0.15) 1px, transparent 1px)",
+                backgroundSize: "40px 40px",
               }}
             />
             <div className="relative z-10">
@@ -382,12 +385,12 @@ export default function LandingPage() {
           <div className="feature-card md:col-span-12 relative rounded-[2rem] p-12 md:p-16 overflow-hidden border border-white/5 group"
             style={{ background: "linear-gradient(135deg, rgba(139,92,246,0.1) 0%, rgba(5,5,5,0) 50%, rgba(22,163,74,0.08) 100%)" }}
           >
-            <div className="absolute inset-0 pointer-events-none"
+            {/* <div className="absolute inset-0 pointer-events-none"
               style={{
                 backgroundImage: "linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)",
                 backgroundSize: "60px 60px",
               }}
-            />
+            /> */}
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-violet-500/30 via-green-500/30 to-transparent" />
             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
               <div>
@@ -412,7 +415,7 @@ export default function LandingPage() {
 
       {/*
           FAQ SECTION */}
-      <section id="faq" className="relative z-10 px-6 md:px-12 py-40 max-w-4xl mx-auto">
+      <section id="faq" className="relative z-10 px-6 md:px-12 py-8 max-w-4xl mx-auto">
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 mb-6">
             <span className="text-[11px] uppercase tracking-widest font-bold text-violet-400">FAQ</span>
@@ -435,7 +438,7 @@ export default function LandingPage() {
 
       {/*
           FINAL CTA*/}
-      <section className="relative z-10 px-6 md:px-12 pb-40">
+      <section className="relative z-10 px-6 md:px-12 pb-40 py-25">
         <div className="max-w-[1400px] mx-auto relative rounded-[3rem] p-12 md:p-32 text-center overflow-hidden border border-white/5"
           style={{ background: "linear-gradient(135deg, rgba(139,92,246,0.12) 0%, rgba(5,5,5,0.98) 50%, rgba(22,163,74,0.08) 100%)" }}
         >
@@ -479,8 +482,13 @@ export default function LandingPage() {
         <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-5 gap-12 mb-20">
           <div className="col-span-2">
             <div className="flex items-center gap-2 mb-6">
-              <div className="w-5 h-5 bg-white rotate-45" />
-              <span className="font-bold tracking-tighter text-xl">QUIZPULL.AI</span>
+              
+              <div className="flex items-center gap-2 group cursor-pointer">
+            <div className="w-5 h-5 bg-white rotate-45 group-hover:rotate-180 transition-transform duration-500" />
+            <span className="font-bold tracking-tighter text-xl uppercase">
+              Quizpull.ai
+            </span>
+          </div>
             </div>
             <p className="text-neutral-500 text-sm max-w-xs leading-relaxed">
               The world's most advanced AI study partner. Designed for those who demand precision and speed in their learning journey.
@@ -577,22 +585,19 @@ function DevQuizCard() {
   return (
     <div className="relative">
       {/* Purple glow behind card */}
-      <div
+      {/* <div
         className="absolute inset-0 rounded-[2.5rem] pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse at 50% 50%, rgba(139,92,246,0.22) 0%, transparent 70%)",
+          background: "",
           filter: "blur(30px)",
           transform: "scale(1.1)",
         }}
-      />
+      /> */}
 
       {/* Card */}
       <div
         className="relative rounded-[2.5rem] overflow-hidden border border-green-500/15"
-        style={{
-          background:
-            "linear-gradient(135deg, rgba(22,163,74,0.12) 0%, rgba(16,185,129,0.05) 30%, rgba(5,5,5,0.96) 100%)",
-        }}
+       
       >
         {/* Grid overlay */}
         <div

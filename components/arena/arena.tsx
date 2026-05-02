@@ -148,20 +148,16 @@ export default function QuizArena({ fileId }: { fileId: string }) {
   if (!mode) {
     return (
       <div className="min-h-screen  flex flex-col items-center justify-center px-6 py-16"
-        style={{
-          background: "#050505",
-          backgroundImage:
-            "radial-gradient(ellipse 90% 60% at 50% -5%, rgba(139,92,246,0.18) 0%, transparent 55%)",
-        }}
+        
       >
-        <div
+        {/* <div
           className="fixed inset-0 pointer-events-none z-0"
           style={{
             backgroundImage:
               "linear-gradient(rgba(139,92,246,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(139,92,246,0.04) 1px, transparent 1px)",
             backgroundSize: "80px 80px",
           }}
-        />
+        /> */}
         <span className="text-xs font-bold tracking-[0.2em] bg-violet-400/10 border border-violet-400/20 px-4 py-1.5 rounded-full mb-6">
           QUIZ ARENA
         </span>
@@ -310,11 +306,7 @@ export default function QuizArena({ fileId }: { fileId: string }) {
   const progress = (currentIndex / questions.length) * 100;
 
   return (
-    <div className="min-h-screen flex flex-col" style={{
-      background: "#050505",
-      backgroundImage:
-        "radial-gradient(ellipse 90% 60% at 50% -5%, rgba(139,92,246,0.18) 0%, transparent 55%)",
-    }}>
+    <div className="min-h-screen flex flex-col" >
       <div
         className="fixed inset-0 pointer-events-none z-0"
         style={{
