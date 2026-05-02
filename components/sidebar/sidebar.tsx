@@ -4,28 +4,15 @@ import { getUser } from "@/utils/auth";
 import { useEffect ,useState } from "react";
 import { useRouter } from "next/navigation";
 import { handleLogout } from "@/utils/auth";
-export default function Sidebar({ isGuest }: { isGuest: boolean }) {
+export default function Sidebar({activeUser}:{activeUser:string}) {
   const router = useRouter()
   const navItems = [
     { name: "Dashboard", icon: LayoutDashboard, locked: false },
     // { name: "Generate Quiz", icon: Zap, locked: false },
-    { name: "History", icon: History, locked: isGuest },
+    { name: "History", icon: History, locked: !activeUser },
     // { name: "Analytics", icon: BarChart3, locked: isGuest },
   ];
-  const [activeUser, setActiveUser] = useState("");
-  const fetchActiveUser = async () => {
-    const user = await getUser();
-    setActiveUser(user?.email!)
-  }
-
   
-  useEffect(() => {
-    fetchActiveUser();
-  }, [])
-
-
-  
-
   return (
     <aside className="w-64 border-r border-white/5  hidden md:flex flex-col" >
       <div className="p-6 flex items-center gap-3">

@@ -61,8 +61,9 @@ export default function UploadSection({ onUploadSuccess }: UploadSectionProps) {
   return (
     <div
       className={`bg-[#0a0a0a] rounded-2xl p-8 h-full flex flex-col justify-center transition-all cursor-pointer
-      ${dragActive ? "border-white/40 bg-white/5" : "border-white/10 hover:border-white/20"}
-      border-dashed`}
+  border border-dashed
+  ${dragActive ? "border-white/40 bg-white/5" : "border-white/10 hover:border-white/20"}
+`}
       onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
       onDragLeave={() => setDragActive(false)}
       onDrop={(e) => {

@@ -3,7 +3,7 @@
 
 import { useStats } from "@/context/context";
 
-export default function StatsSection({ isGuest }: { isGuest: boolean }) {
+export default function StatsSection({activeUser}:{activeUser:string}) {
   const { accuracy, totalQuizzes, practiceTime } = useStats();
 
   const stats = [
@@ -22,11 +22,11 @@ export default function StatsSection({ isGuest }: { isGuest: boolean }) {
         <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-500">
           Live Stats
         </h3>
-        {isGuest && (
+        {/* {!activeUser && ( */}
           <span className="text-[10px] bg-yellow-500/10 text-yellow-500 px-2 py-0.5 rounded-full border border-yellow-500/20">
             Session Only
           </span>
-        )}
+        {/* )} */}
       </div>
 
       <div className="space-y-4">

@@ -2,11 +2,8 @@
 
 import { Lock, Clock, ChevronRight, FileText } from "lucide-react";
 
-interface HistorySectionProps {
-  isGuest: boolean;
-}
 
-export default function HistorySection({ isGuest }: HistorySectionProps) {
+export default function HistorySection({activeUser}:{activeUser:string}) {
 
   // Mock data for display
   const historyData = [
@@ -41,13 +38,13 @@ export default function HistorySection({ isGuest }: HistorySectionProps) {
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
           <h2 className="text-xl font-bold tracking-tight text-white">Quiz History</h2>
-          {isGuest && (
+          {!activeUser && (
             <span className="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[10px] font-bold text-neutral-500 uppercase tracking-wider">
               Local Only
             </span>
           )}
         </div>
-        <button className={`text-xs font-medium text-neutral-500 hover:text-white transition-colors ${isGuest ? 'invisible' : 'visible'}`}>
+        <button className={`text-xs font-medium text-neutral-500 hover:text-white transition-colors ${!activeUser ? 'invisible' : 'visible'}`}>
           View Full Archive
         </button>
       </div>
@@ -56,7 +53,7 @@ export default function HistorySection({ isGuest }: HistorySectionProps) {
       <div className="relative bg-[#0a0a0a] border border-white/5 rounded-3xl overflow-hidden shadow-xl">
         
         {/* The List of Items */}
-        <div className={`divide-y divide-white/5 ${isGuest ? "blur-[6px] select-none pointer-events-none opacity-50" : ""}`}>
+        <div className={`divide-y divide-white/5 ${!activeUser ? "blur-[6px] select-none pointer-events-none opacity-50" : ""}`}>
           {historyData.map((item) => (
             <div 
               key={item.id} 
@@ -97,7 +94,7 @@ export default function HistorySection({ isGuest }: HistorySectionProps) {
         </div>
 
         {/* GUEST OVERLAY - The "Paywall" UI */}
-        {isGuest && (
+        {/* {!activeUser && ( */}
           <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-8 bg-black/20 backdrop-blur-[2px]">
             <div className="w-14 h-14 rounded-2xl bg-white text-black flex items-center justify-center shadow-[0_0_40px_rgba(255,255,255,0.15)] mb-6">
               <Lock size={24} />
@@ -112,16 +109,16 @@ export default function HistorySection({ isGuest }: HistorySectionProps) {
 
             
           </div>
-        )}
+        {/* )} */}
       </div>
 
       {/* Footer Info (Visible only to users) */}
-      {!isGuest && (
+      {/* {activeUser&& ( */}
         <div className="mt-4 flex items-center gap-2 text-xs text-neutral-600 px-2">
           <div className="w-1.5 h-1.5 rounded-full bg-green-500/50" />
           Cloud sync active. All sessions are saved.
         </div>
-      )}
+      {/* )} */}
     </div>
   );
 }
