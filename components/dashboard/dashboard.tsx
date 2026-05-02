@@ -6,8 +6,7 @@ import Navbar from "../navbar/nav";
 import UploadSection from "../upload/upload";
 import StatsSection from "../stats/stat";
 import HistorySection from "../history/history";
-// import { AllFilePage } from "../allfiles/allfiles";
-import AllFilePage from "../allfiles/allfiles";
+import { AllFilePage } from "../allfiles/allfiles";
 import { useEffect } from "react";
 import { getUser } from "@/utils/auth";
 
@@ -27,8 +26,6 @@ export default function DashboardPage() {
   useEffect(() => {
     fetchActiveUser();
   }, []);
-
-  const AllFilePageComponent = AllFilePage as React.ComponentType<{ newFile: any }>;
 
   return (
     <div
@@ -57,7 +54,7 @@ export default function DashboardPage() {
             <HistorySection activeUser={activeUser}/>
           </section>
         </div>
-        <AllFilePageComponent newFile={latestUpload} />
+        <AllFilePage newFile={latestUpload} />
       </main>
     </div>
   );

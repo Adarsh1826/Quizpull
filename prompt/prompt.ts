@@ -1,4 +1,4 @@
-export const buildPrompt = (text: string, questionsPerChunk: number) => {
+export const buildPrompt = (text: string) => {
   return `
 You are a quiz generation engine.
 
