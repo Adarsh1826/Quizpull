@@ -32,7 +32,7 @@ export async function POST(req: Request) {
             );
         }
 
-        const prompt = buildPrompt(text, 0);
+        const prompt = buildPrompt(text);
         let raw = await fetchLLM(prompt);
 
         raw = raw.replace(/```json/g, "").replace(/```/g, "").trim();
