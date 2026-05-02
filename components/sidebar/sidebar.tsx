@@ -8,9 +8,9 @@ export default function Sidebar({ isGuest }: { isGuest: boolean }) {
   const router = useRouter()
   const navItems = [
     { name: "Dashboard", icon: LayoutDashboard, locked: false },
-    { name: "Generate Quiz", icon: Zap, locked: false },
+    // { name: "Generate Quiz", icon: Zap, locked: false },
     { name: "History", icon: History, locked: isGuest },
-    { name: "Analytics", icon: BarChart3, locked: isGuest },
+    // { name: "Analytics", icon: BarChart3, locked: isGuest },
   ];
   const [activeUser, setActiveUser] = useState("");
   const fetchActiveUser = async () => {

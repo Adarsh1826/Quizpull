@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { fetchAllProblemOfSinglePdf } from "@/utils/fetch-problem";
 import { useStats } from "@/context/context";
-
+import { getGuestPdfById } from "@/utils/db";
 type Mode = "timed" | "practice" | null;
 
 interface Question {
@@ -14,7 +14,7 @@ interface Question {
 
 const TIMED_SECONDS = 30;
 
-export default function QuizArena({ fileId }: { fileId: number }) {
+export default function QuizArena({ fileId }: { fileId: string }) {
   const [mode, setMode] = useState<Mode>(null);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(false);
@@ -57,10 +57,27 @@ export default function QuizArena({ fileId }: { fileId: number }) {
     setMode(selectedMode);
     setLoading(true);
     try {
-      const data = await fetchAllProblemOfSinglePdf(fileId);
-      const raw = data?.[0]?.questions;
-      setQuizTitle(raw?.quiz_title ?? "Quiz");
-      setQuestions(Array.isArray(raw?.questions) ? raw.questions : []);
+      const isGuest = String(fileId).startsWith("guest-");
+      const actualId = String(fileId).replace("guest-", "");
+
+      if (isGuest) {
+
+        const file = await getGuestPdfById(Number(actualId));
+        //console.log(file);
+
+
+        const raw = file?.questions;
+
+        setQuizTitle(raw?.quiz_title ?? "Quiz");
+        setQuestions(Array.isArray(raw?.questions) ? raw.questions : []);
+      }
+      else {
+        const data = await fetchAllProblemOfSinglePdf(Number(fileId));
+        const raw = data?.[0]?.questions;
+        setQuizTitle(raw?.quiz_title ?? "Quiz");
+        setQuestions(Array.isArray(raw?.questions) ? raw.questions : []);
+      }
+
     } catch {
       setQuestions([]);
     }
@@ -81,8 +98,8 @@ export default function QuizArena({ fileId }: { fileId: number }) {
     typeof q.correct_answer === "number"
       ? q.correct_answer
       : q.options.findIndex(
-          (o) => o.toLowerCase() === String(q.correct_answer).toLowerCase()
-        );
+        (o) => o.toLowerCase() === String(q.correct_answer).toLowerCase()
+      );
 
   const handleSelect = (idx: number) => {
     if (answered) return;
@@ -98,7 +115,7 @@ export default function QuizArena({ fileId }: { fileId: number }) {
 
   const handleNext = () => {
     if (currentIndex + 1 >= questions.length) {
-      finishQuiz(); 
+      finishQuiz();
       setFinished(true);
     } else {
       setCurrentIndex((i) => i + 1);
@@ -130,8 +147,22 @@ export default function QuizArena({ fileId }: { fileId: number }) {
   // ── Mode Select ──────────────────────────────────────────────────────────
   if (!mode) {
     return (
-      <div className="min-h-screen bg-[#080810] flex flex-col items-center justify-center px-6 py-16">
-        <span className="text-xs font-bold tracking-[0.2em] text-violet-400 bg-violet-400/10 border border-violet-400/20 px-4 py-1.5 rounded-full mb-6">
+      <div className="min-h-screen  flex flex-col items-center justify-center px-6 py-16"
+        style={{
+          background: "#050505",
+          backgroundImage:
+            "radial-gradient(ellipse 90% 60% at 50% -5%, rgba(139,92,246,0.18) 0%, transparent 55%)",
+        }}
+      >
+        <div
+          className="fixed inset-0 pointer-events-none z-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(139,92,246,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(139,92,246,0.04) 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
+          }}
+        />
+        <span className="text-xs font-bold tracking-[0.2em] bg-violet-400/10 border border-violet-400/20 px-4 py-1.5 rounded-full mb-6">
           QUIZ ARENA
         </span>
         <h1 className="font-bold text-center mb-3 text-4xl md:text-5xl bg-gradient-to-br from-white to-violet-400 bg-clip-text text-transparent">
@@ -230,9 +261,9 @@ export default function QuizArena({ fileId }: { fileId: number }) {
   if (finished) {
     const grade =
       pct >= 90 ? { label: "Outstanding", color: "text-emerald-400" } :
-      pct >= 75 ? { label: "Excellent", color: "text-blue-400" } :
-      pct >= 60 ? { label: "Good Job", color: "text-amber-400" } :
-      { label: "Keep Practicing", color: "text-rose-400" };
+        pct >= 75 ? { label: "Excellent", color: "text-blue-400" } :
+          pct >= 60 ? { label: "Good Job", color: "text-amber-400" } :
+            { label: "Keep Practicing", color: "text-rose-400" };
 
     return (
       <div className="min-h-screen bg-[#080810] flex flex-col items-center justify-center px-6 py-16 gap-6 animate-[fadeIn_0.4s_ease]">
@@ -279,7 +310,19 @@ export default function QuizArena({ fileId }: { fileId: number }) {
   const progress = (currentIndex / questions.length) * 100;
 
   return (
-    <div className="min-h-screen bg-[#080810] flex flex-col">
+    <div className="min-h-screen flex flex-col" style={{
+      background: "#050505",
+      backgroundImage:
+        "radial-gradient(ellipse 90% 60% at 50% -5%, rgba(139,92,246,0.18) 0%, transparent 55%)",
+    }}>
+      <div
+        className="fixed inset-0 pointer-events-none z-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(139,92,246,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(139,92,246,0.04) 1px, transparent 1px)",
+          backgroundSize: "80px 80px",
+        }}
+      />
 
       {/* Header */}
       <div className="flex items-center justify-between px-6 py-4 border-b border-white/5">

@@ -1,13 +1,8 @@
 "use client"
-import { usePathname } from "next/navigation";
 import QuizArena from "@/components/arena/arena";
+import { use } from "react";
 
-export default async function QuizArenaPage() {
-  const route  = usePathname();
-  const fileId = Number(route.split('/').pop());
-
-  // console.log("filed id  ", fileId);
-  
-
-  return <QuizArena fileId ={fileId} />;
+export default function QuizArenaPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
+  return <QuizArena fileId={id} />;
 }

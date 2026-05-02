@@ -104,9 +104,9 @@ export default function LandingPage() {
       />
 
       {/*NAVBAR*/}
+
       <nav
-        className="fixed top-0 w-full z-[100] border-b border-white/5 backdrop-blur-xl"
-        style={{ background: "rgba(5,5,5,0.7)" }}
+        className=" top-0 w-full z-[100] "
       >
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 h-20 flex justify-between items-center">
           <div className="flex items-center gap-2 group cursor-pointer">
@@ -122,7 +122,7 @@ export default function LandingPage() {
             <div className="h-4 w-[1px] bg-white/10" />
             <Link
               href="/dashboard"
-              className="text-sm font-semibold text-white px-5 py-2.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all"
+              className="text-sm font-semibold text-white px-5 py-2.5 "
             >
               Dashboard →
             </Link>
@@ -144,7 +144,7 @@ export default function LandingPage() {
       </nav>
 
       {/* HERO SECTION*/}
-      <section ref={heroRef} className="relative z-10 pt-44 pb-32 px-6 md:px-12 max-w-[1400px] mx-auto">
+      <section ref={heroRef} className="relative z-10 pt-52 pb-32 px-6 md:px-12 max-w-[1400px] mx-auto">
         <div className="grid lg:grid-cols-[1fr,1fr] gap-16 items-center">
           <div className="space-y-8">
             {/* Green badge */}
@@ -154,6 +154,7 @@ export default function LandingPage() {
                 Now Live — AI-Powered Quizzes
               </span>
             </div>
+
 
             <h1 className="text-6xl md:text-8xl font-bold tracking-tighter leading-[0.92]">
               <div className="overflow-hidden py-1">
@@ -198,7 +199,7 @@ export default function LandingPage() {
             {/* Avatars */}
             <div className="hero-line flex items-center gap-4 pt-2">
               <div className="flex -space-x-3">
-                {["/avatars/a1.png","/avatars/a2.png","/avatars/a3.png","/avatars/a4.png"].map((src, i) => (
+                {["/avatars/a1.png", "/avatars/a2.png", "/avatars/a3.png", "/avatars/a4.png"].map((src, i) => (
                   <img key={i} src={src} alt="user" className="w-8 h-8 rounded-full border-2 border-[#050505] object-cover" />
                 ))}
               </div>
@@ -485,7 +486,7 @@ export default function LandingPage() {
               The world's most advanced AI study partner. Designed for those who demand precision and speed in their learning journey.
             </p>
           </div>
-          {["Product", "Company", "Legal"].map((cat) => (
+          {/* {["Product", "Company", "Legal"].map((cat) => (
             <div key={cat} className="space-y-4">
               <h4 className="text-white font-bold text-sm uppercase tracking-widest">{cat}</h4>
               <div className="flex flex-col gap-3">
@@ -494,13 +495,13 @@ export default function LandingPage() {
                 ))}
               </div>
             </div>
-          ))}
+          ))} */}
         </div>
         <div className="max-w-[1400px] mx-auto flex justify-between items-center text-[10px] uppercase tracking-widest font-bold text-neutral-600">
           <span>© 2026 Quizpull.ai Inc.</span>
           <div className="flex gap-8">
-            <Link href="#" className="hover:text-white">Status</Link>
-            <Link href="#" className="hover:text-white">Security</Link>
+            {/* <Link href="#" className="hover:text-white">Status</Link>
+            <Link href="#" className="hover:text-white">Security</Link> */}
           </div>
         </div>
       </footer>
@@ -624,11 +625,10 @@ function DevQuizCard() {
               <button
                 key={t.id}
                 onClick={() => handleTab(i)}
-                className={`px-3 py-1.5 rounded-lg text-[11px] font-bold uppercase tracking-wide border transition-all ${
-                  i === activeTab
-                    ? `${t.bg} ${t.border} ${t.color}`
-                    : "bg-white/[0.03] border-white/5 text-neutral-500 hover:border-white/10 hover:text-neutral-300"
-                }`}
+                className={`px-3 py-1.5 rounded-lg text-[11px] font-bold uppercase tracking-wide border transition-all ${i === activeTab
+                  ? `${t.bg} ${t.border} ${t.color}`
+                  : "bg-white/[0.03] border-white/5 text-neutral-500 hover:border-white/10 hover:text-neutral-300"
+                  }`}
               >
                 {t.label}
               </button>
@@ -683,9 +683,8 @@ function DevQuizCard() {
                 return (
                   <div key={i} className={cls} onClick={() => setSelected(i)}>
                     <span
-                      className={`w-5 h-5 rounded-full border flex items-center justify-center text-[10px] font-bold flex-shrink-0 ${
-                        revealed && isCorrect ? topic.border + " " + topic.color : "border-current"
-                      }`}
+                      className={`w-5 h-5 rounded-full border flex items-center justify-center text-[10px] font-bold flex-shrink-0 ${revealed && isCorrect ? topic.border + " " + topic.color : "border-current"
+                        }`}
                     >
                       {String.fromCharCode(65 + i)}
                     </span>
@@ -734,10 +733,10 @@ function DevQuizCard() {
                     activeTab === 0
                       ? "linear-gradient(90deg,#22c55e,#10b981)"
                       : activeTab === 1
-                      ? "linear-gradient(90deg,#8b5cf6,#6366f1)"
-                      : activeTab === 2
-                      ? "linear-gradient(90deg,#38bdf8,#0ea5e9)"
-                      : "linear-gradient(90deg,#f97316,#fb923c)",
+                        ? "linear-gradient(90deg,#8b5cf6,#6366f1)"
+                        : activeTab === 2
+                          ? "linear-gradient(90deg,#38bdf8,#0ea5e9)"
+                          : "linear-gradient(90deg,#f97316,#fb923c)",
                 }}
               />
             </div>
@@ -747,8 +746,8 @@ function DevQuizCard() {
           <div className="grid grid-cols-3 gap-3">
             {[
               { label: "Accuracy", val: "94%", color: topic.color },
-              { label: "Streak",   val: "12d",  color: "text-violet-400" },
-              { label: "Time",     val: "3:20", color: "text-neutral-300" },
+              { label: "Streak", val: "12d", color: "text-violet-400" },
+              { label: "Time", val: "3:20", color: "text-neutral-300" },
             ].map((s, i) => (
               <div key={i} className="text-center px-3 py-3 rounded-xl bg-white/[0.03] border border-white/5">
                 <div className={`text-lg font-bold ${s.color}`}>{s.val}</div>

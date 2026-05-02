@@ -1,7 +1,7 @@
 import { openDB } from "idb";
 
 // open db
-const getDB = async () =>
+export const getDB = async () =>
   openDB("guest_db", 1, {
     upgrade(db) {
       if (!db.objectStoreNames.contains("pdfs")) {
@@ -42,4 +42,11 @@ export const deleteGuestPdf = async (id: number) => {
 export const clearGuestPdfs = async () => {
   const db = await getDB();
   return db.clear("pdfs");
+};
+
+export const updateGuestPdf = async (id: number, data: object) => {
+  const db = await getDB();
+  const existing = await db.get("pdfs", id);
+  if (!existing) throw new Error("Guest PDF not found");
+  return db.put("pdfs", { ...existing, ...data });
 };

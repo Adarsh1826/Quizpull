@@ -1,101 +1,3 @@
-// "use client";
-
-// import { UploadCloud, FileText } from "lucide-react";
-// import uplaodFileToBucket from "@/utils/upload";
-// import { useEffect, useState } from "react";
-// import { getUser } from "@/utils/auth";
-// import { saveGuestPdf } from "@/utils/db";
-
-// export default function UploadSection(
-// ) {
-//   const [file, setFile] = useState<File | null>(null);
-//   const [dragActive, setDragActive] = useState(false);
-//   const [activeUser,setActiveUser] = useState("")
-
-//   const handleFile = (file: File | undefined) => {
-//     if (!file) return;
-//     setFile(file);
-//   };
-
-//   useEffect(()=>{
-//     const test = async ()=>{
-//       const us = await getUser();
-//       setActiveUser(us?.email!)
-//     }
-//     test();
-//   },[])
-//   const handleUpload= async()=>{
-//     if(activeUser){
-//       // user exist
-//       console.log("Uploaded to storage");
-      
-//       await uplaodFileToBucket(file)
-//     }
-//     else{
-//       console.log("Saved to local db");
-      
-//       await saveGuestPdf(file!)
-//     }
-//   }
-//   return (
-//     <div
-//       className={` border rounded-2xl p-8 h-full flex flex-col justify-center transition-all cursor-pointer
-//       ${dragActive ? "border-white/40 bg-white/5" : "border-white/10 hover:border-white/20"}
-//       border-dashed`}
-//       onDragOver={(e) => {
-//         e.preventDefault();
-//         setDragActive(true);
-//       }}
-//       onDragLeave={() => setDragActive(false)}
-//       onDrop={(e) => {
-//         e.preventDefault();
-//         setDragActive(false);
-//         handleFile(e.dataTransfer.files?.[0]);
-//       }}
-      
-//     >
-//       <div className="flex flex-col items-center text-center space-y-4">
-//         <div className="p-4 bg-white/5 rounded-full group-hover:scale-110 transition-transform">
-//           <UploadCloud size={32} className="text-neutral-300" />
-//         </div>
-
-//         {/* Hidden input */}
-//         <input
-//           type="file"
-//           id="fileUpload"
-//           className="hidden"
-//           onChange={(e) => handleFile(e.target.files?.[0])}
-//         />
-
-//         {/* Click area */}
-//         <label
-//           htmlFor="fileUpload"
-//           className="text-sm text-neutral-400 cursor-pointer hover:text-white transition"
-//         >
-//           Drag & drop your PDF here or <span className="underline">browse</span>
-//         </label>
-
-//         {/* File preview */}
-//         {file && (
-//           <div className="flex items-center gap-2 mt-2 text-sm text-neutral-300 bg-white/5 px-3 py-2 rounded-lg">
-//             <FileText size={16} />
-//             {file.name}
-//           </div>
-//         )}
-
-//         {/* Button */}
-//         <button
-//           onClick={ handleUpload}
-//           className="px-6 py-2 bg-white text-black font-semibold rounded-full text-sm mt-4 active:scale-95 transition-transform hover:bg-gray-200"
-//         >
-//           Upload
-//         </button>
-//       </div>
-//     </div>
-//   );
-// }
-
-
 
 "use client";
 
@@ -158,7 +60,7 @@ export default function UploadSection({ onUploadSuccess }: UploadSectionProps) {
 
   return (
     <div
-      className={`border rounded-2xl p-8 h-full flex flex-col justify-center transition-all cursor-pointer
+      className={`bg-[#0a0a0a] rounded-2xl p-8 h-full flex flex-col justify-center transition-all cursor-pointer
       ${dragActive ? "border-white/40 bg-white/5" : "border-white/10 hover:border-white/20"}
       border-dashed`}
       onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
@@ -203,11 +105,11 @@ export default function UploadSection({ onUploadSuccess }: UploadSectionProps) {
         <button
           onClick={handleUpload}
           disabled={!file || uploading}
-          className="px-6 py-2 bg-white text-black font-semibold rounded-full text-sm mt-4 active:scale-95 transition-transform hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          className="px-6 py-2 bg-white text-black   shadow-[0_0_40px_rgba(255,255,255,0.15)] font-semibold rounded-full text-sm mt-4 active:scale-95 transition-transform hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
         >
           {uploading ? (
             <>
-              <span className="w-3 h-3 rounded-full border border-black border-t-transparent animate-spin" />
+              <span className="w-3 h-3 rounded-full border bg-white text-black flex items-center justify-center shadow-[0_0_40px_rgba(255,255,255,0.15)] animate-spin" />
               Uploading...
             </>
           ) : (

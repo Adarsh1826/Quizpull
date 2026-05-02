@@ -104,21 +104,13 @@ export default function HistorySection({ isGuest }: HistorySectionProps) {
             </div>
             
             <div className="text-center space-y-2 max-w-xs">
-              <h3 className="text-md font-bold text-white tracking-tight">Your history is temporary</h3>
-              <p className="text-sm text-neutral-400 leading-relaxed">
+              <h3 className="text-md font-bold text-white tracking-tight">Something is brewing</h3>
+              {/* <p className="text-sm text-neutral-400 leading-relaxed">
                 As a guest, your progress will be cleared when you close this session. Sign in to save your quizzes forever.
-              </p>
+              </p> */}
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 mt-2 max-w-[300px]">
-              <button className="flex-1 py-1 px-4 bg-white text-black text-xs font-bold rounded-xl hover:bg-neutral-200 transition-all"
-              >
-                Create Free Account
-              </button>
-              <button className="flex-1 py-1 px-4 bg-white/5 border border-white/10 text-white text-xs font-bold rounded-xl hover:bg-white/10 transition-all">
-                Learn More
-              </button>
-            </div>
+            
           </div>
         )}
       </div>
