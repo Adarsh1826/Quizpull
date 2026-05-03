@@ -37,7 +37,7 @@ export default function RootLayout({
           />
           <span className="relative flex items-center gap-2 text-[11px] md:text-xs text-neutral-300 tracking-wide font-medium">
             <span
-              className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-widest"
+              className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-widest"
               style={{
                 background: "rgba(251,191,36,0.1)",
                 border: "1px solid rgba(251,191,36,0.2)",
@@ -49,9 +49,6 @@ export default function RootLayout({
             <a  href="#faq"
               className="underline underline-offset-2 text-neutral-400 hover:text-white transition-colors">
               Text-based PDFs only — scanned &amp; image PDFs not yet supported.
-            
-
-              
             </a>
             
           </span>

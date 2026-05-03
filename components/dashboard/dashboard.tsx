@@ -14,6 +14,7 @@ import { getUser } from "@/utils/auth";
 export default function DashboardPage() {
   const [activeUser, setActiveUser] = useState("");
   const [hasGeneratedQuiz, setHasGeneratedQuiz] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false)
   const fetchActiveUser = async () => {
     const user = await getUser();
     setActiveUser(user?.email!)
@@ -36,10 +37,10 @@ export default function DashboardPage() {
 
     >
 
-      <Sidebar activeUser={activeUser} />
+      <Sidebar activeUser={activeUser}  isOpen={sidebarOpen} onClose={()=>setSidebarOpen(false)}/>
 
       <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        <Navbar activeUser={activeUser} />
+        <Navbar activeUser={activeUser}  onOpenSidebar={() => setSidebarOpen(true)}/>
 
         <div className="flex-1 overflow-y-auto p-6 md:p-10 space-y-10 custom-scrollbar">
           {/* Top Row: Upload & Stats */}
