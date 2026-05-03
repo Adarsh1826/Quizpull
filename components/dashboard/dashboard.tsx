@@ -6,8 +6,8 @@ import Navbar from "../navbar/nav";
 import UploadSection from "../upload/upload";
 import StatsSection from "../stats/stat";
 import HistorySection from "../history/history";
-// import { AllFilePage } from "../allfiles/allfiles";
-import AllFilePage from "../allfiles/allfiles";
+import { AllFilePage } from "../allfiles/allfiles";
+
 import { useEffect } from "react";
 import { getUser } from "@/utils/auth";
 
